@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>managers</title>{% endblock %}
+{% block nav %}
+<div class="form-inline my-2 my-lg-0">
+        {% if user.is_authenticated %}
+        <h6 class="text-dark mx-3 my-auto">Hello Host</h6>
+        {% endif %}
+        
+  </div>
+{% endblock %}
+{% block header %}
+<header class="masthead text-white text-center" style="background:url('{% static '/img/bg-2.jpg' %}')no-repeat center center fixed;background-size:cover;">
+    <div class="text-center">
+{% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-{{ msg.tags }} alert-dismissible fade show mx-auto text-lg-left" style="width: 80%;" role="alert">
+            <strong> {{ msg }} </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+    {% endfor  %}
+    {% endif %}
+<div class="container">
+<div class="card text-dark" align= center style="width: 20rem;">
+      <img src="/media/{{ host.host_image }}" class="card-img-top" alt="...">
+            <div class="card-body">
+       <h5 class="card-title">{{ host.host_name }}</h5>
+        <p class="card-text">{{ host.host_desc }}</p>
+<form action = "managerguest/" method="post">{% csrf_token %}
+<button class="btn btn-dark" style="width: 30%;" type="submit" value="{{ host.host_name }}" name="host" >Guest List </button>   
+</form>
+
+ </div>
+</div>
+</div>
+</header>
+{% endblock %}
+</script>
